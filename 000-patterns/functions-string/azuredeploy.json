@@ -1,0 +1,85 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "skipValidation": {
+      "type": "string",
+      "defaultValue": "skipValidation",
+      "allowedValues": [ "skipValidation" ],
+      "metadata": { "description": "This parameter is used for all functions that will skip validation." }
+    },
+    "String": {
+      "type": "string",
+      "defaultValue": "String 3-Values  "
+    },
+    "Int": {
+      "type": "int",
+      "defaultValue": 10
+    }
+  },
+  "variables": {
+    "base64": "[base64(parameters('string'))]",
+    "concat": "[concat(parameters('string'),'/fixedtext/',parameters('int'))]",
+    "padLeft": "[padleft(parameters('string'),3,'0')]",
+    "replace": "[replace(parameters('string'),'-','')]",
+    "split": "[split(parameters('string'),' ')]",
+    "string": "[parameters('Int')]",
+    "subString": "[substring(parameters('string'), 3, 4)]",
+    "toLower": "[toLower(parameters('string'))]",
+    "toUpper": "[toUpper(parameters('string'))]",
+    "trim": "[trim(parameters('string'))]",
+    "uniqueString": "[uniqueString(parameters('string'))]",
+    "uri": "[uri('http://contoso.com/resources/azuredeploy.json','mytemplate.json')]"
+  },
+  "resources": [ ],
+  "outputs": {
+    "Base64": {
+      "type": "string",
+      "value": "[variables('base64')]"
+    },
+    "concat": {
+      "type": "string",
+      "value": "[variables('concat')]"
+    },
+    "padLeft": {
+      "type": "string",
+      "value": "[variables('padLeft')]"
+    },
+    "replace": {
+      "type": "string",
+      "value": "[variables('replace')]"
+    },
+    "split": {
+      "type": "string",
+      "value": "[variables('split')[0]]"
+    },
+    "string": {
+      "type": "string",
+      "value": "[variables('string')]"
+    },
+    "subString": {
+      "type": "string",
+      "value": "[variables('subString')]"
+    },
+    "toLower": {
+      "type": "string",
+      "value": "[variables('toLower')]"
+    },
+    "toUpper": {
+      "type": "string",
+      "value": "[variables('toUpper')]"
+    },
+    "trim": {
+      "type": "string",
+      "value": "[variables('trim')]"
+    },
+    "uniqueString": {
+      "type": "string",
+      "value": "[variables('uniqueString')]"
+    },
+    "uri": {
+      "type": "string",
+      "value": "[variables('uri')]"
+    }
+  }
+}

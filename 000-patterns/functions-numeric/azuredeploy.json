@@ -1,0 +1,75 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "skipValidation": {
+      "type": "string",
+      "defaultValue": "skipValidation",
+      "allowedValues": [ "skipValidation" ],
+      "metadata": { "description": "This parameter is used for all functions that will skip validation." }
+    },
+    "String": {
+      "type": "string",
+      "defaultValue": "String"
+    },
+    "Int1": {
+      "type": "int",
+      "defaultValue": 10
+    },
+    "Int2": {
+      "type": "int",
+      "defaultValue": 6
+    }
+  },
+  "variables": {
+    "add": "[add(parameters('Int1'),parameters('Int2'))]",
+    "copyIndex": "[parameters('skipValidation')]",
+    "div": "[div(parameters('Int1'),parameters('Int2'))]",
+    "int": "[parameters('skipValidation')]",
+    "mod": "[mod(parameters('Int1'),parameters('Int2'))]",
+    "mul": "[mul(parameters('Int1'),parameters('Int2'))]",
+    "sub": "[sub(parameters('Int1'),parameters('Int2'))]"
+  },
+  "resources": [
+    {
+      "name": "[concat('resourcename', copyIndex())]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[resourceGroup().location]",
+      "copy": {
+        "name": "copyname",
+        "count": 2 },
+      "properties": {"accountType": "Standard_LRS"}
+    }
+  ],
+  "outputs": {
+    "add": {
+      "type": "int",
+      "value": "[variables('add')]"
+    },
+    "copyIndex": {
+      "type": "string",
+      "value": "[variables('copyIndex')]"
+    },
+    "div": {
+      "type": "int",
+      "value": "[variables('div')]"
+    },
+    "int": {
+      "type": "int",
+      "value": "[variables('int')]"
+    },
+    "mod": {
+      "type": "int",
+      "value": "[variables('mod')]"
+    },
+    "mul": {
+      "type": "int",
+      "value": "[variables('mul')]"
+    },
+    "sub": {
+      "type": "int",
+      "value": "[variables('sub')]"
+    }
+  }
+}

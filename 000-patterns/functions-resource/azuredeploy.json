@@ -1,0 +1,68 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "skipValidation": {
+      "type": "string",
+      "defaultValue": "skipValidation",
+      "allowedValues": [ "skipValidation" ],
+      "metadata": { "description": "This parameter is used for all functions that will skip validation." }
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "mvestorage123"
+    }
+  },
+  "variables": {
+    "listKeys": "[parameters('skipValidation')]",
+    "providers": {
+      "nameSpace": "[providers('Microsoft.Network')]",
+      "type": "[providers('Microsoft.Network', 'virtualNetworks')]"
+    },
+    "reference": "The reference function derives its value from a runtime state, and therefore cannot be used in the variables section. It can be used in outputs section of a template.",
+    "resourceGroup": "[resourceGroup()]",
+    "resourceId": "[parameters('skipValidation')]",
+    "subscription": "[subscription()]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('storageAccountName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    }
+  ],
+  "outputs": {
+    "listKeys": {
+      "type": "object",
+      "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-05-01-preview')]"
+    },
+    "providersNameSpace": {
+      "type": "object",
+      "value": "[variables('providers').nameSpace]"
+    },
+    "providersType": {
+      "type": "object",
+      "value": "[variables('providers').type]"
+    },
+    "reference": {
+      "type": "object",
+      "value": "[reference(parameters('storageAccountName'))]"
+    },
+    "resourceGroup": {
+      "type": "object",
+      "value": "[variables('resourceGroup')]"
+    },
+    "resourceId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+    },
+    "subscription": {
+      "type": "object",
+      "value": "[variables('subscription')]"
+    }
+  }
+}

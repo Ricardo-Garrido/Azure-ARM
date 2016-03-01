@@ -1,0 +1,31 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "skipValidation": {
+      "type": "string",
+      "defaultValue": "skipValidation",
+      "allowedValues": [ "skipValidation" ],
+      "metadata": { "description": "This parameter is used for all functions that will skip validation." }
+    },
+    "Array": {
+      "type": "array",
+      "defaultValue": [ "this", "is", "an", "array" ]
+    }
+  },
+  "variables": {
+      "concat": "[concat(parameters('array'),parameters('array'))]",
+      "length": "[length(parameters('array'))]"
+  },
+  "resources": [ ],
+  "outputs": {
+    "concat": {
+      "type": "array",
+      "value": "[variables('concat')]"
+    },
+    "length": {
+      "type": "int",
+      "value": "[variables('length')]"
+    }
+  }
+}

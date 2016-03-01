@@ -1,0 +1,83 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "skipValidation": {
+      "type": "string",
+      "defaultValue": "skipValidation",
+      "allowedValues": [ "skipValidation" ],
+      "metadata": { "description": "This parameter is used for all functions that will skip validation." }
+    },
+    "string": {
+      "type": "string",
+      "defaultValue": "This is a string",
+      "minLength": 1,
+      "maxLength": 24
+    },
+    "int": {
+      "type": "int",
+      "defaultValue": 10,
+      "minValue": 1,
+      "maxValue": 1000
+    },
+    "array": {
+      "type": "array",
+      "defaultValue": [ "this", "is", "an", "array" ]
+    },
+    "bool": {
+      "type": "bool",
+      "defaultValue": true,
+      "allowedValues": [ true, false ]
+    },
+    "object": {
+      "type": "object",
+      "defaultValue": {
+        "node1": {
+          "sub1a": "value1a",
+          "sub1b": "value1b"
+        },
+        "node2": {
+          "sub2a": "value2a",
+          "sub2b": "value2b"
+        }
+      }
+    },
+    "secureString": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "deployment": "[deployment()]"
+  },
+  "resources": [ ],
+  "outputs": {
+    "deployment": {
+      "type": "object",
+      "value": "[variables('deployment')]"
+    },
+    "string": {
+      "type": "string",
+      "value": "[parameters('string')]"
+    },
+    "int": {
+      "type": "int",
+      "value": "[parameters('int')]"
+    },
+    "array": {
+      "type": "array",
+      "value": "[parameters('array')]"
+    },
+    "bool": {
+      "type": "bool",
+      "value": "[parameters('bool')]"
+    },
+    "object": {
+      "type": "object",
+      "value": "[parameters('object')]"
+    },
+    "secureString": {
+      "type": "securestring",
+      "value": "[parameters('securestring')]"
+    }
+  }
+}
