@@ -1,0 +1,79 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": { },
+  "variables": {
+    "template": {
+      "base": "https://raw.githubusercontent.com/marcvaneijk/arm/master/000-foundation/examples/nested-sharing-state/",
+      "nested1": "shared1.json",
+      "nested2": "shared2.json"
+    },
+    "apiVersion": {
+      "resources": { "deployments": "2015-01-01" },
+      "storage": { "storageAccounts": "2015-06-15" },
+      "network": {
+        "virtualNetworks": "2015-06-15",
+        "networkInterfaces": "2015-06-15",
+        "loadBalancers": "2015-06-15",
+        "publicIPAddresses": "2015-06-15"
+      },
+      "compute": { "virtualMachines": "2015-06-15" }
+    }
+  },
+  "resources": [
+    {
+      "name": "[variables('template').nested1]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "[variables('apiVersion').resources.deployments]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[uri(concat(variables('template').base, 'nested/'), variables('template').nested1)]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apiVersionResourcesDeployments": {
+            "value": "[variables('apiVersion').resources.deployments]"
+          },
+          "apiVersionStorageStorageAccounts": {
+            "value": "[variables('apiVersion').storage.storageAccounts]"
+          },
+          "apiVersionNetworkVirtualNetworks": {
+            "value": "[variables('apiVersion').network.virtualNetworks]"
+          },
+          "apiVersionNetworkNetworkInterfaces": {
+            "value": "[variables('apiVersion').network.networkInterfaces]"
+          },
+          "apiVersionNetworkLoadBalancers": {
+            "value": "[variables('apiVersion').network.loadBalancers]"
+          },
+          "apiVersionNetworkPublicIPAddresses": {
+            "value": "[variables('apiVersion').network.publicIPAddresses]"
+          },
+          "apiVersionComputeVirtualMachines": {
+            "value": "[variables('apiVersion').compute.virtualMachines]"
+          }
+        }
+      }
+    },
+    {
+      "name": "[variables('template').nested2]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "[variables('apiVersion').resources.deployments]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[uri(concat(variables('template').base, 'nested/'), variables('template').nested2)]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apiVersion": {
+            "value": "[variables('apiVersion')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

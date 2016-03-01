@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apiVersionResourcesDeployments": {
+      "type": "string"
+    },
+    "apiVersionStorageStorageAccounts": {
+      "type": "string"
+    },
+    "apiVersionNetworkVirtualNetworks": {
+      "type": "string"
+    },
+    "apiVersionNetworkNetworkInterfaces": {
+      "type": "string"
+    },
+    "apiVersionNetworkLoadBalancers": {
+      "type": "string"
+    },
+    "apiVersionNetworkPublicIPAddresses": {
+      "type": "string"
+    },
+    "apiVersionComputeVirtualMachines": {
+      "type": "string"
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "apiVersionParameterString": {
+      "value": "[parameters('apiVersionStorageStorageAccounts')]",
+      "type": "string"
+    }
+  }
+}
